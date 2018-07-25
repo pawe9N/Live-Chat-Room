@@ -8,6 +8,13 @@ namespace LiveChatRoom.Controllers
 {
     public class HomeController : Controller
     {
+        [AllowAnonymous]
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        [Authorize]
         public ActionResult Chat()
         {
             return View();

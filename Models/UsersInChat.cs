@@ -5,7 +5,7 @@ using System.Web;
 
 namespace LiveChatRoom.Models
 {
-    public static class Users
+    public static class UsersInChat
     {
         static public int usersCount = 1;
         static public Dictionary<string, int> usersDictionary = new Dictionary<string, int>();

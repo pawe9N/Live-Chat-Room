@@ -4,7 +4,8 @@
         background-color: azure;
     }
 </style>
-<h2>The best live chat room in the web!</h2>
+
+<h2>Welcome @(Request.IsAuthenticated ? HttpContext.Current.User.Identity.Name : "Guest") - This is best live chat room in the web!</h2>
 <div class="chat-panel panel panel-default">
     <div class="panel-heading">
         <i class="fa fa-paper-plane fa-fw"></i>
@@ -28,6 +29,13 @@
     </div>
 </div>
 
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logoutForm" }))
+    {
+        <a href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
+    }
+}
 
 @section scripts {
     <!--Script references. -->
@@ -43,28 +51,25 @@
             var chat = $.connection.chatHub;
 
             // Some variables for differentiate users
-            var previousPosition = "left";
-            var previousName = "Default User";
+            var position = "right";
+            var name = "@HttpContext.Current.User.Identity.Name"
 
             // Add the message to the page.
             chat.client.addNewMessageToPage = function (name, message, value) {
 
-                if (name != previousName) {
-                    if (previousPosition == "right") {
-                        previousPosition = "left";
-                    }
-                    else {
-                        previousPosition = "right";
-                    }
+                if (name != "@HttpContext.Current.User.Identity.Name") {
+                    position = "left";
+                }
+                else
+                {
+                    position = "right";
                 }
 
-                $('#discussion').append('<p style="color:blue;text-align:' + previousPosition + '"><strong><img = src="https://www.phplivesupport.com/pics/icons/avatars/public/avatar_' + value + '.png" title=' + name + '>'
+                $('#discussion').append('<p style="color:blue;text-align:' + position + '"><strong><img = src="https://www.phplivesupport.com/pics/icons/avatars/public/avatar_' + value + '.png" title=' + name + '>'
                     + ' </strong> ' + htmlEncode(message) + '</p>');
-
-                previousName = name;
             };
             // Get the user name and store it to prepend to messages.
-            $('#displayname').val(prompt('Enter your name:', ''));
+            $('#displayname').val(name);
 
             // Set initial focus to message input box.
             $('#message').focus();
