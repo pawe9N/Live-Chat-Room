@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LiveChatRoom.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,16 +9,38 @@ namespace LiveChatRoom.Controllers
 {
     public class HomeController : Controller
     {
-        [AllowAnonymous]
+        private User UserModel; 
+
+        [Authorize]
         public ActionResult Index()
         {
-            return View();
+            using (MyDatabaseEntities dc = new MyDatabaseEntities())
+            {
+                var v = dc.Users.Where(a => a.EmailID == HttpContext.User.Identity.Name).FirstOrDefault();
+                if (v != null)
+                {
+                    User user = (User)v;
+                    UserModel = user;
+                }
+            }
+
+            return View(UserModel);
         }
 
         [Authorize]
         public ActionResult Chat()
         {
-            return View();
+            using (MyDatabaseEntities dc = new MyDatabaseEntities())
+            {
+                var v = dc.Users.Where(a => a.EmailID == HttpContext.User.Identity.Name).FirstOrDefault();
+                if (v != null)
+                {
+                    User user = (User)v;
+                    UserModel = user;
+                }
+            }
+
+            return View(UserModel);
         }
     }
 }

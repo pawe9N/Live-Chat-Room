@@ -127,12 +127,12 @@
     <Content Include="Global.asax" />
     <Content Include="Models\MyModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>MyModel.edmx</DependentUpon>
+      <DependentUpon>UsersDatabaseModel.edmx</DependentUpon>
       <LastGenOutput>MyModel.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\MyModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>MyModel.edmx</DependentUpon>
+      <DependentUpon>UsersDatabaseModel.edmx</DependentUpon>
       <LastGenOutput>MyModel.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.min.js" />
@@ -148,6 +148,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\UserControllerExtended\HttpPost.cs" />
+    <Compile Include="Controllers\UserControllerExtended\NonAction.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Models\Crypto.cs" />
@@ -165,10 +167,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\MyModel.Designer.cs">
+    <Compile Include="Models\UsersDatabaseModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>MyModel.edmx</DependentUpon>
+      <DependentUpon>UsersDatabaseModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\ResetPasswordModel.cs" />
     <Compile Include="Models\User.cs">
@@ -182,12 +184,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
-    <EntityDeploy Include="Models\MyModel.edmx">
+    <EntityDeploy Include="Models\UsersDatabaseModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>MyModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>UsersDatabaseModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\MyModel.edmx.diagram">
-      <DependentUpon>MyModel.edmx</DependentUpon>
+    <Content Include="Models\UsersDatabaseModel.edmx.diagram">
+      <DependentUpon>UsersDatabaseModel.edmx</DependentUpon>
     </Content>
     <None Include="packages.config" />
     <Content Include="Views\Home\Chat.cshtml" />

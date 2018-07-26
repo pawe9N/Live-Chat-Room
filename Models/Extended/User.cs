@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace LiveChatRoom.Models
 {
@@ -14,14 +12,6 @@ namespace LiveChatRoom.Models
 
     public class UserMetadata
     {
-        [Display(Name = "First Name")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "First name required")]
-        public string FirstName { get; set; }
-
-        [Display(Name = "Last Name")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "last name required")]
-        public string LastName { get; set; }
-
         [Display(Name = "Email ID")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Email ID required")]
         [DataType(DataType.EmailAddress)]
@@ -32,6 +22,11 @@ namespace LiveChatRoom.Models
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM-dd-yyyy}")]
         public DateTime DateOfBirth { get; set; }
 
+        [Display(Name = "Gender")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Gender is required")]
+        public string Gender { get; set; }
+
+        [Display(Name = "Password")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Password is required")]
         [DataType(DataType.Password)]
         [MinLength(6, ErrorMessage = "Minimum 6 characters required")]

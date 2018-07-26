@@ -5,7 +5,7 @@
     }
 </style>
 
-<h2>Welcome @(Request.IsAuthenticated ? HttpContext.Current.User.Identity.Name : "Guest") - This is best live chat room in the web!</h2>
+<h2>Welcome @(Request.IsAuthenticated ? ViewBag.UserName : "Guest") - This is best live chat room in the web!</h2>
 <div class="chat-panel panel panel-default">
     <div class="panel-heading">
         <i class="fa fa-paper-plane fa-fw"></i>
@@ -52,12 +52,12 @@
 
             // Some variables for differentiate users
             var position = "right";
-            var name = "@HttpContext.Current.User.Identity.Name"
+            var name = "@Model.UserName"
 
             // Add the message to the page.
             chat.client.addNewMessageToPage = function (name, message, value) {
 
-                if (name != "@HttpContext.Current.User.Identity.Name") {
+                if (name != "@Model.UserName") {
                     position = "left";
                 }
                 else
