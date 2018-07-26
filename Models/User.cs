@@ -23,5 +23,6 @@ namespace LiveChatRoom.Models
         public Nullable<System.DateTime> DateOfBirth { get; set; }
         public bool IsEmailVerified { get; set; }
         public System.Guid ActivationCode { get; set; }
+        public string ResetPasswordCode { get; set; }
     }
 }
