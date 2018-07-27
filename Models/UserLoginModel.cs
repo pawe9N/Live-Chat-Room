@@ -6,7 +6,7 @@ using System.Web;
 
 namespace LiveChatRoom.Models
 {
-    public class UserLogin
+    public class UserLoginModel
     {
         [Display(Name = "Email ID")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Email ID required")]

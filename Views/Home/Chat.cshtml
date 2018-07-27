@@ -65,7 +65,7 @@
                     position = "right";
                 }
 
-                $('#discussion').append('<p style="color:blue;text-align:' + position + '"><strong><img = src="https://www.phplivesupport.com/pics/icons/avatars/public/avatar_' + value + '.png" title=' + name + '>'
+                $('#discussion').append('<p style="color:blue;text-align:' + position + '"><strong><img = src="https://www.phplivesupport.com/pics/icons/avatars/public/avatar_' + ("@Model.Gender" == "Male" ? 1 : 2) + '.png" title=' + name + '>'
                     + ' </strong> ' + htmlEncode(message) + '</p>');
             };
             // Get the user name and store it to prepend to messages.

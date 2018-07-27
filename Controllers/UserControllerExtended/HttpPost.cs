@@ -20,18 +20,25 @@ namespace LiveChatRoom.Controllers
             bool Status = false;
             string Message = "";
 
-            // Model Validation
-            if (ModelState.IsValid)
+            #region //Email is already Exist
+            bool isExist = IsEmailExist(user.EmailID);
+            if (isExist)
             {
-                #region //Email is already Exist
-                bool isExist = IsEmailExist(user.EmailID);
-                if (isExist)
-                {
-                    ModelState.AddModelError("EmailExist", "Email already exist");
-                    return View(user);
-                }
-                #endregion
+                ModelState.AddModelError("EmailExist", "Email already exist");
+            }
+            #endregion
 
+            #region //Is User adult
+            bool isAdult = IsUserAdult(user.DateOfBirth);
+            if (!isAdult)
+            {
+                ModelState.AddModelError("InvalidDate", "You have to be an adult to be in this chat!");
+            }
+            #endregion
+
+            // Model Validation
+            if (ModelState.IsValid && !isExist && isAdult)
+            {
                 #region //Generate Activation Code
                 user.ActivationCode = Guid.NewGuid();
                 #endregion
@@ -72,7 +79,7 @@ namespace LiveChatRoom.Controllers
         //Login POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(UserLogin login, string ReturnUrl = "")
+        public ActionResult Login(UserLoginModel login, string ReturnUrl = "")
         {
             string Message = "";
 

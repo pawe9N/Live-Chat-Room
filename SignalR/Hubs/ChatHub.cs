@@ -11,12 +11,7 @@ namespace LiveChatRoom.SignalR.Hubs
     {
         public void Send(string name, string message)
         {
-            if (!UsersInChat.usersDictionary.ContainsKey(name))
-            {
-                UsersInChat.usersDictionary[name] = UsersInChat.usersCount++;
-            }
-
-            Clients.All.addNewMessageToPage(name, message, UsersInChat.usersDictionary[name]);
+            Clients.All.addNewMessageToPage(name, message);
         }
     }
 }

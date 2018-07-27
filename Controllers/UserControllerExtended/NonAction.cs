@@ -27,6 +27,15 @@ namespace LiveChatRoom.Controllers
         }
 
         [NonAction]
+        public bool IsUserAdult(DateTime? date)
+        {
+            DateTime maxDate = DateTime.Now.AddYears(-18);
+            DateTime minDate = DateTime.Now.AddYears(-100);
+
+            return (date >= minDate && date <= maxDate);
+        }
+
+        [NonAction]
         private void SendVerificationLinkEmail(string emailID, string activationCode, string emailFor = "VerifyAccount")
         {
             var verifyUrl = "User/" + emailFor + "/" + activationCode;
