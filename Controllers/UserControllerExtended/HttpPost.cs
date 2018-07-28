@@ -20,24 +20,8 @@ namespace LiveChatRoom.Controllers
             bool Status = false;
             string Message = "";
 
-            #region //Email is already Exist
-            bool isExist = IsEmailExist(user.EmailID);
-            if (isExist)
-            {
-                ModelState.AddModelError("EmailExist", "Email already exist");
-            }
-            #endregion
-
-            #region //Is User adult
-            bool isAdult = IsUserAdult(user.DateOfBirth);
-            if (!isAdult)
-            {
-                ModelState.AddModelError("InvalidDate", "You have to be an adult to be in this chat!");
-            }
-            #endregion
-
             // Model Validation
-            if (ModelState.IsValid && !isExist && isAdult)
+            if (ModelState.IsValid)
             {
                 #region //Generate Activation Code
                 user.ActivationCode = Guid.NewGuid();
@@ -90,7 +74,7 @@ namespace LiveChatRoom.Controllers
                 {
                     if (string.Compare(Crypto.Hash(login.Password), v.Password) == 0)
                     {
-                        int timeout = login.RememberMe ? 525600 : 1; //525600 min = 1
+                        int timeout = login.RememberMe ? 525600 : 1; //525600 = 1 min
                         var ticket = new FormsAuthenticationTicket(v.EmailID, login.RememberMe, timeout);
                         string encrypted = FormsAuthentication.Encrypt(ticket);
                         var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encrypted)

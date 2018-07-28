@@ -1,20 +1,20 @@
 ﻿<style>
     div.panel-body {
-        overflow: scroll;
+        overflow-y: auto;
         background-color: azure;
     }
 </style>
 
 <h2>Welcome @(Request.IsAuthenticated ? ViewBag.UserName : "Guest") - This is best live chat room in the web!</h2>
-<div class="chat-panel panel panel-default">
+<div class="chat-panel panel panel-default" style="display:flex;align-items:center;flex-direction: column;">
     <div class="panel-heading">
         <i class="fa fa-paper-plane fa-fw"></i>
     </div>
     <!-- /.panel-heading -->
-    <div class="panel-body" id="chat" style="height:250px;">
+    <div class="panel-body" id="chat">
+        <div id="discussion"></div>
         <input type="hidden" id="displayname" />
-
-        <p id="discussion"></p>
+        <input type="hidden" id="gender" />
     </div>
     <!-- /.panel-body -->
     <div class="panel-footer">
@@ -53,23 +53,28 @@
             // Some variables for differentiate users
             var position = "right";
             var name = "@Model.UserName"
+            var gender = "@Model.Gender"
 
             // Add the message to the page.
-            chat.client.addNewMessageToPage = function (name, message, value) {
+            chat.client.addNewMessageToPage = function (name, message, gender, value) {
 
                 if (name != "@Model.UserName") {
                     position = "left";
                 }
-                else
-                {
+                else {
                     position = "right";
                 }
 
-                $('#discussion').append('<p style="color:blue;text-align:' + position + '"><strong><img = src="https://www.phplivesupport.com/pics/icons/avatars/public/avatar_' + ("@Model.Gender" == "Male" ? 1 : 2) + '.png" title=' + name + '>'
-                    + ' </strong> ' + htmlEncode(message) + '</p>');
-            };
+                $('#discussion').append('<div style="width:60%;float:' + position + ';">' +
+                    '<img style="float:'+position+';" src="https://www.phplivesupport.com/pics/icons/avatars/public/avatar_' + (gender == "Male" ? 1 : 2) + '.png" title=' + name + '>'+
+                    '<p style = "text-align:' + position + ';float:'+position+';" class= "message" > ' + htmlEncode(message) + '</p ></div>');
+               
+                $("#discussion").append("<div style='clear:both'/>")
+                $(".panel-body").animate({ scrollTop: $('.panel-body').prop("scrollHeight") }, 1000);
+            }
             // Get the user name and store it to prepend to messages.
             $('#displayname').val(name);
+            $('#gender').val(gender);
 
             // Set initial focus to message input box.
             $('#message').focus();
@@ -78,8 +83,8 @@
             $.connection.hub.start().done(function () {
                 $('#sendmessage').click(function () {
                     // Call the Send method on the hub.
-                    chat.server.send($('#displayname').val(), $('#message').val());
-                    // Clear text box and reset focus for next comment.
+                    chat.server.send(name, $('#message').val(), gender);
+                    // Clear text box, scroll down and reset focus for next comment.
                     $('#message').val('').focus();
                 });
             });
@@ -90,9 +95,7 @@
                     $('#sendmessage').trigger('click');
                 }
             });
-
         });
-
         // This optional function html-encodes messages for display in the page.
         function htmlEncode(value) {
             var encodedValue = $('<div />').text(value).html();

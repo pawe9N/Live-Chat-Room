@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using static LiveChatRoom.App_Classes.CustomValidators;
 
 namespace LiveChatRoom.Models
 {
@@ -15,11 +15,13 @@ namespace LiveChatRoom.Models
         [Display(Name = "Email ID")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Email ID required")]
         [DataType(DataType.EmailAddress)]
+        [IsEmailExist(ErrorMessage = "This e-mail address is already taken")]
         public string EmailID { get; set; }
 
         [Display(Name = "Date of birth")]
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM-dd-yyyy}")]
+        [DateOfBirthAdult(ErrorMessage = "You have to be an adult")]
         public DateTime DateOfBirth { get; set; }
 
         [Display(Name = "Gender")]

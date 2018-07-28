@@ -1,6 +1,7 @@
 ﻿using LiveChatRoom.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -14,26 +15,7 @@ namespace LiveChatRoom.Controllers
     public partial class UserController : Controller
     {
         private string email = "";
-        private string password = "";
-
-        [NonAction]
-        private bool IsEmailExist(string emailID)
-        {
-            using (MyDatabaseEntities dc = new MyDatabaseEntities())
-            {
-                var v = dc.Users.Where(a => a.EmailID == emailID).FirstOrDefault();
-                return v != null;
-            }
-        }
-
-        [NonAction]
-        public bool IsUserAdult(DateTime? date)
-        {
-            DateTime maxDate = DateTime.Now.AddYears(-18);
-            DateTime minDate = DateTime.Now.AddYears(-100);
-
-            return (date >= minDate && date <= maxDate);
-        }
+        private string password = "";   
 
         [NonAction]
         private void SendVerificationLinkEmail(string emailID, string activationCode, string emailFor = "VerifyAccount")
