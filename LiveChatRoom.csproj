@@ -204,12 +204,13 @@
     </Content>
     <None Include="packages.config" />
     <Content Include="Views\Home\Chat.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\ActiveUsers.cshtml" />
     <Content Include="Views\User\Registration.cshtml" />
     <Content Include="Views\User\VerifyAccount.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\User\ForgotPassword.cshtml" />
     <Content Include="Views\User\ResetPassword.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

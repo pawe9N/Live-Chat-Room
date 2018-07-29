@@ -139,7 +139,7 @@ namespace LiveChatRoom.Controllers
                     //confirm password property is on mymodel class
                     dc.Configuration.ValidateOnSaveEnabled = false;
                     dc.SaveChanges();
-                    Message = "Reset password link has been sent to your email id.";
+                    Message = "Reset password link has been sent to your email.";
                 }
                 else
                 {
@@ -176,7 +176,7 @@ namespace LiveChatRoom.Controllers
             }
             else
             {
-                Message = "Error in ResetPassword";
+                Message = "Error in reset password!";
             }
             ViewBag.Status = Status;
             ViewBag.Message = Message;

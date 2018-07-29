@@ -9,22 +9,18 @@ namespace LiveChatRoom.Controllers
 {
     public class HomeController : Controller
     {
-        private User UserModel; 
+        private User UserModel;
 
         [Authorize]
         public ActionResult Index()
         {
-            using (MyDatabaseEntities dc = new MyDatabaseEntities())
-            {
-                var v = dc.Users.Where(a => a.EmailID == HttpContext.User.Identity.Name).FirstOrDefault();
-                if (v != null)
-                {
-                    User user = (User)v;
-                    UserModel = user;
-                }
-            }
+            return View();
+        }
 
-            return View(UserModel);
+        [Authorize]
+        public ActionResult ActiveUsers()
+        {
+            return View();
         }
 
         [Authorize]

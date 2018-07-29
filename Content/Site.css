@@ -47,8 +47,7 @@ footer p{
 h1 {
     width: 100%;
     border-bottom: 3px solid #66FCF1;
-    font-size: 400% !important;
-    padding-top: 2%;
+    font-size: 390% !important;
     text-align: center;
     text-shadow: 0 0 3px #66FCF1, 0 0 10px black, 0 0 10px #66FCF1, 0 0 10px black, 0 0 10px #66FCF1, 0 0 55px #45A29E, 0 0 75px #66FCF1;
 }
@@ -87,8 +86,6 @@ input {
     text-align: center;
     font-weight: lighter;
 }
-
-
 
 .checkbox{
     margin-top: -3%;
@@ -129,7 +126,7 @@ input[type="submit"] {
     width: 100%;
     background-color: #66FCF1 !important;
     color: #0B0C10 !important;
-    margin-bottom: 5%;
+    margin-bottom: 2%;
 }
 
 input:hover{
@@ -147,7 +144,7 @@ input:-webkit-autofill:active {
 }
 
 label {
-    font-size: 120%;
+    font-size: 110%;
     text-align: center !important;
     width: 100%;
 }
@@ -196,7 +193,7 @@ input[type="radio"]:checked + label {
 input[type="date"] {
     font-size: 110%;
     text-align: center;
-    padding-left: 20%;
+    padding-left: 15%;
 }
 
 input[type=date]::-webkit-inner-spin-button {
@@ -216,10 +213,6 @@ input[type=date]::-webkit-inner-spin-button {
     width: 100% !important;
 }
 
-#messageDiv {
-    /*border: 1px solid white;*/
-}
-
 .message {
     font-size: 140%;
     width: auto;
@@ -235,13 +228,15 @@ input[type=date]::-webkit-inner-spin-button {
     word-wrap: break-word;
     margin-top: 1%;
     padding: 1%;
+    min-width: 70px;
+    text-align: center;
 }
 
 #chat {
     box-shadow: 0 0 5px #45A29E, 0 0 10px #fff, 0 0 20px #45A29E, 0 0 30px #45A29E, 0 0 40px #45A29E, 0 0 55px #45A29E, 0 0 75px #45A29E;
     padding-top: 1%;
     border: 1px solid black;
-    border-radius: 5% 5% 0 0;
+    border-radius: 1% 1% 1% 1%;
     background-color: #0B0C10;
     color: #45A29E;
     height: 500px;
@@ -249,15 +244,17 @@ input[type=date]::-webkit-inner-spin-button {
     overflow-y: scroll;
 }
 
-img{
+img {
     margin-right: 1%;
     margin-top: 1%;
     width: 10%;
+    min-width: 40px;
+    min-height: 40px;
     height: 10%;
     border-radius: 50%;
 }
 
-.links{
+.links {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -337,22 +334,49 @@ img{
 }
 
 
-textarea::-webkit-scrollbar, #chat::-webkit-scrollbar {
+textarea::-webkit-scrollbar{
     width: 4px;
     background: black;
 }
 
-textarea::-webkit-scrollbar-track, #chat::-webkit-scrollbar {
+textarea::-webkit-scrollbar-track{
     width: 3px;
     background: black;
 }
 
-textarea::-webkit-scrollbar-thumb, #chat::-webkit-scrollbar {
+textarea::-webkit-scrollbar-thumb{
     width: 1px;
     background: #45A29E;
 }
 
-#email-not-found{
+#chat::-webkit-scrollbar {
+    width: 10px;
+    background: black;
+}
+
+#chat::-webkit-scrollbar-track {
+    width: 5px;
+    background: black;
+}
+
+#chat::-webkit-scrollbar-thumb {
+    width: 3px;
+    background: #45A29E;
+}
+
+#email-not-found {
     font-size: 110%;
     margin-top: -2%;
+}
+
+#user-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 0 5px #45A29E, 0 0 10px #fff, 0 0 20px #45A29E, 0 0 30px #45A29E, 0 0 40px #45A29E, 0 0 55px #45A29E, 0 0 75px #45A29E;
+    border: 2px solid #45A29E;
+    border-radius: 15% 15% 0 0;
+    padding: 5%;
+    font-size: 150%;
+    min-width: 50%;
 }

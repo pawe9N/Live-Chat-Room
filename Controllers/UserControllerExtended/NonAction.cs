@@ -14,8 +14,8 @@ namespace LiveChatRoom.Controllers
 {
     public partial class UserController : Controller
     {
-        private string email = "";
-        private string password = "";   
+        private string email = ""; //Replace with actual email
+        private string password = "";   //Replace with actual password
 
         [NonAction]
         private void SendVerificationLinkEmail(string emailID, string activationCode, string emailFor = "VerifyAccount")
@@ -23,9 +23,9 @@ namespace LiveChatRoom.Controllers
             var verifyUrl = "User/" + emailFor + "/" + activationCode;
             var link = Request.Url.AbsoluteUri.Replace(Request.Url.AbsolutePath, "/" + verifyUrl);
 
-            var fromEmail = new MailAddress(email, "Live Chat Room"); //Replace with actual email
+            var fromEmail = new MailAddress(email, "Live Chat Room"); 
             var toEmail = new MailAddress(emailID);
-            var fromEmailPassword = password; //Replace with actual password
+            var fromEmailPassword = password; 
 
             string subject = "", body = "";
             if (emailFor == "VerifyAccount")

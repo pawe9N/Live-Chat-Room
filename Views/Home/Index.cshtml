@@ -1,17 +1,7 @@
-﻿@{
+﻿
+@{
     ViewBag.Title = "Index";
 }
 
 <h2>Index</h2>
-
-Welcome @Model.UserName
-Your gender is @Model.Gender
-
-@if (Request.IsAuthenticated)
-{
-    using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logoutForm" }))
-    {
-        <a href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
-    }
-}
 
