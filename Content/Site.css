@@ -1,63 +1,115 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
-    background-color: #1F2833 !important;
+﻿html, body {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #0B0C10 !important;
     color: #66FCF1 !important;
+    font-family: Impact !important;
+    display: flex;
+    min-height: 100% !important;
+    width: 100% !important;
+    height: auto;
 }
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 1%;
     padding-right: 1%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center !important;
+    height: 100%;
 }
 
-.layout-header
+.renderBody {
+    box-shadow: 0 0 5px #45A29E, 0 0 10px #fff, 0 0 20px #45A29E, 0 0 30px #45A29E, 0 0 40px #45A29E, 0 0 55px #45A29E, 0 0 75px #45A29E;
+    background-color: #1F2833;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 92%;
+    border: 3px solid #45A29E;
+    border-radius: 5%;
+}
+
+form
 {
+    width: 70%;
+    display: flex;
+    align-items: center;
+}
+
+footer p{
     text-align: center;
-    font-size: 300%;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+h1 {
+    width: 100%;
+    border-bottom: 3px solid #66FCF1;
+    font-size: 400% !important;
+    padding-top: 2%;
+    text-align: center;
+    text-shadow: 0 0 3px #66FCF1, 0 0 10px black, 0 0 10px #66FCF1, 0 0 10px black, 0 0 10px #66FCF1, 0 0 55px #45A29E, 0 0 75px #66FCF1;
 }
 
 h2 {
-    padding: 5%;
-    text-align: center;
+    text-shadow: 0 0 3px #66FCF1, 0 0 10px black, 0 0 10px #66FCF1, 0 0 10px black, 0 0 10px #66FCF1, 0 0 35px #45A29E, 0 0 55px #66FCF1;
 }
 
 .form-horizontal {
-    width: 50%;
-    padding: 0 !important;
-    border: 5px solid #45A29E;
-    border-radius: 30px;
-    margin: auto;
+    width: 100%;
+    padding: 1%;
+    font-family: Impact;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.form-group{
-    margin: 0 !important;
-    width: 100% !important;
-    padding-top: 2%;
-    padding-bottom: 2%;
-    padding-left: 12%;
+.form-group {
+    box-shadow: 0 0 5px #45A29E, 0 0 10px #fff, 0 0 20px #45A29E, 0 0 30px #45A29E, 0 0 40px #45A29E, 0 0 55px #45A29E, 0 0 75px #45A29E;
+    font-family: Impact !important;
+    border: 2px solid #45A29E;
+    border-radius: 15% 15% 0 0;
+    padding-bottom: 1%;
+    background-color: #0B0C10;
+    width: 70% !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-input{
-    background-color: #0B0C10 !important;
+input {
+    font-family: Impact !important;
+    font-size: 105%;
+    background-color: black !important;
     color: #45A29E !important;
-    font-weight: bold;
+    text-align: center;
+    font-weight: lighter;
+}
+
+
+
+.checkbox{
+    margin-top: -3%;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
 }
 
 input[type=checkbox] {
-    width: 24px;
-    height: 25px;
-    margin-right: 8px;
+    margin: 1% auto;
+    width: 30px;
+    height: 30px;
     cursor: pointer;
-    font-size: 110%;
+    font-size: 130%;
 }
 
 input[type=checkbox]:before {
     font-weight: bold;
     border: 1px solid white;
     border-radius: 5px;
-    content: "\00a0✓\00a0";
+    content: "\00a0\00a0✓\00a0\00a0";
     background-color: #0B0C10;
     color: #0B0C10;
     display: inline-block;
@@ -66,53 +118,113 @@ input[type=checkbox]:before {
 
 input[type=checkbox]:checked:before {
     color: #45A29E;
-    content: "\00a0✓\00a0";
+    content: "\00a0\00a0✓\00a0\00a0";
 }
 
 input[type="submit"] {
-    margin-top: 5%;
+    font-size: 150%;
     font-weight: bold;
     border: 1px solid white;
     border-radius: 5px;
     width: 100%;
+    background-color: #66FCF1 !important;
+    color: #0B0C10 !important;
+    margin-bottom: 5%;
 }
 
-input[type="submit"]:hover {
-    background-color: #45A29E !important;
-    color: #0B0C10 !important;
+input:hover{
+    background-color: #0B0C10 !important;
+    color: #45A29E !important;
+    box-shadow: 0 0 5px #45A29E, 0 0 10px #fff, 0 0 20px #45A29E, 0 0 30px #45A29E, 0 0 40px #45A29E, 0 0 55px #45A29E, 0 0 75px #45A29E;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-text-fill-color: #45A29E !important;
+    -webkit-box-shadow: 0 0 0 30px #0B0C10 inset;
 }
 
 label {
+    font-size: 120%;
     text-align: center !important;
     width: 100%;
 }
 
 .radioClass {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    text-align: center;
     border: 1px solid white;
     background-color: #0B0C10;
     border-radius: 5px;
-    padding-left: 25%;
-    padding-top: 2%;
-    padding-bottom: 2%;
     width: 100%;
+}
+
+.radioClass p{
+    padding: 1%;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+input[type="radio"] + label {
+    margin: 0 auto;
+    background-color: #0B0C10;
+    color: #45A29E;
+    width: 100%;
+    display: block;
+}
+
+input[type="radio"]:checked + label {
+    background-color: #45A29E;
+    color: #0B0C10;
+}
+
+.radioLabel{
+    width: 100%;
+    text-align: center;
+}
+
+.radioLabel{
+    cursor: pointer;
 }
 
 input[type="date"] {
     font-size: 110%;
     text-align: center;
+    padding-left: 20%;
+}
+
+input[type=date]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    display: none;
 }
 
 #discussion {
     display: inline;
     width: 100% !important;
     margin: 0 auto;
+    overflow-y: scroll;
+}
+
+.chat-panel{
+    margin-top: 1%;
+    width: 100% !important;
+}
+
+#messageDiv {
+    /*border: 1px solid white;*/
 }
 
 .message {
-    font-size: 120%;
+    font-size: 140%;
     width: auto;
-    max-width: 50%;
-    height: auto;
+    max-width: 60%;
+    height: 100%;
     display: inline-block;
     border: 1px solid white;
     border-radius: 10px;
@@ -126,14 +238,121 @@ input[type="date"] {
 }
 
 #chat {
+    box-shadow: 0 0 5px #45A29E, 0 0 10px #fff, 0 0 20px #45A29E, 0 0 30px #45A29E, 0 0 40px #45A29E, 0 0 55px #45A29E, 0 0 75px #45A29E;
+    padding-top: 1%;
+    border: 1px solid black;
+    border-radius: 5% 5% 0 0;
     background-color: #0B0C10;
     color: #45A29E;
-    height: 300px;
-    width: 60%;
+    height: 500px;
+    width: 90%;
+    overflow-y: scroll;
 }
 
 img{
+    margin-right: 1%;
+    margin-top: 1%;
     width: 10%;
     height: 10%;
     border-radius: 50%;
+}
+
+.links{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 50%;
+}
+
+.links div {
+    margin-top: -2%;
+    margin-bottom: 2%;
+    width: 50%;
+    border: 1px solid white;
+    padding: 1%;
+    text-align: center;
+    box-shadow: 0 0 5px #45A29E, 0 0 5px #fff, 0 0 10px black, 0 0 10px black, 0 0 10px black, 0 0 15px #45A29E, 0 0 15px #45A29E;
+    background-color: #45A29E !important;
+    color: #0B0C10 !important;
+}
+
+.links div:hover {
+    background-color: #0B0C10 !important;
+    color: #45A29E !important;
+}
+
+.links div a {
+    display: block;
+    color: #0B0C10 !important;
+    text-decoration: none;
+}
+
+.links div a:hover {
+    display: block;
+    color: #45A29E !important;
+}
+
+#sendmessage {
+    border: 3px solid #45A29E;
+    border-radius: 15%;
+    height: 100%;
+    width: 140%;
+    background-color: #66FCF1 !important;
+    color: #0B0C10 !important;
+}
+
+#sendmessage:hover {
+    background-color: #0B0C10 !important;
+    color: #66FCF1 !important;
+    box-shadow: 0 0 5px #45A29E, 0 0 10px #fff, 0 0 20px #45A29E, 0 0 30px #45A29E, 0 0 40px #45A29E, 0 0 55px #45A29E, 0 0 75px #45A29E;
+}
+
+#message {
+    margin: 1%;
+    font-family: Impact !important;
+    font-size: 105%;
+    background-color: black !important;
+    color: #45A29E !important;
+    text-align: center;
+    font-weight: lighter;
+    border: 3px solid #45A29E;
+    resize: none;
+    overflow-y: scroll;
+    min-height: 30px;
+    width: 15%;
+}
+
+.panel-footer
+{
+    padding: 1%;
+    width: 70%;
+}
+
+.input-group{
+    width: 100%;
+}
+
+#logoutForm {
+    display: flex;
+}
+
+
+textarea::-webkit-scrollbar, #chat::-webkit-scrollbar {
+    width: 4px;
+    background: black;
+}
+
+textarea::-webkit-scrollbar-track, #chat::-webkit-scrollbar {
+    width: 3px;
+    background: black;
+}
+
+textarea::-webkit-scrollbar-thumb, #chat::-webkit-scrollbar {
+    width: 1px;
+    background: #45A29E;
+}
+
+#email-not-found{
+    font-size: 110%;
+    margin-top: -2%;
 }

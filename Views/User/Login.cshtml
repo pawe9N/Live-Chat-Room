@@ -4,20 +4,18 @@
     ViewBag.Title = "Login";
 }
 
-<h2>Login to chat with people!</h2>
-
+<h2>Login to chat with random people!</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.EmailId, htmlAttributes: new { @class = "control-label col-md-10" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.EmailId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.EmailId, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Email:" } })
                 @Html.ValidationMessageFor(model => model.EmailId, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -25,7 +23,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-10" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Password:" } })
                 @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -40,10 +38,8 @@
             </div>
         </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Login" class="btn btn-default" />
-            </div>
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Login" class="btn btn-default" />
         </div>
 
         @if (ViewBag.Message != null)
@@ -53,16 +49,22 @@
             </div>
         }
     </div>
+
 }
 
-<div>
-    @Html.ActionLink("Register Now!", "Registration", "User")
-</div>
-<div>
-    @Html.ActionLink("Forgot Password?", "ForgotPassword", "User")
+<div class="links col-md-6">
+    <div>
+        @Html.ActionLink("Register Now!", "Registration", "User")
+    </div>
+    <div>
+        @Html.ActionLink("Forgot Password?", "ForgotPassword", "User")
+    </div>
 </div>
 
 @section Scripts{
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+    <script>
+    </script>
 }

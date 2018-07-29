@@ -12,8 +12,12 @@ namespace LiveChatRoom.Models
 
     public class UserMetadata
     {
+        [Display(Name = "User Name")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "User name is required")]
+        public string UserName { get; set; }
+
         [Display(Name = "Email ID")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Email ID required")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Email ID is required")]
         [DataType(DataType.EmailAddress)]
         [IsEmailExist(ErrorMessage = "This e-mail address is already taken")]
         public string EmailID { get; set; }
@@ -22,6 +26,7 @@ namespace LiveChatRoom.Models
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM-dd-yyyy}")]
         [DateOfBirthAdult(ErrorMessage = "You have to be an adult")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Date of birth is required")]
         public DateTime DateOfBirth { get; set; }
 
         [Display(Name = "Gender")]

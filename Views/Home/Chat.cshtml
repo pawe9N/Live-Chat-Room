@@ -5,7 +5,7 @@
     }
 </style>
 
-<h2>Welcome @(Request.IsAuthenticated ? ViewBag.UserName : "Guest") - This is best live chat room in the web!</h2>
+<h2>Welcome @(Request.IsAuthenticated ? Model.UserName : "Guest") - Say hello to random people!</h2>
 <div class="chat-panel panel panel-default" style="display:flex;align-items:center;flex-direction: column;">
     <div class="panel-heading">
         <i class="fa fa-paper-plane fa-fw"></i>
@@ -19,11 +19,10 @@
     <!-- /.panel-body -->
     <div class="panel-footer">
         <div class="input-group">
-            <input id="message" type="text" name="message" class="form-control input-sm" placeholder="Type your message here..." />
+            <textarea id="message" name="message" class="form-control input-sm" placeholder="Type your message here..." rows="2"></textarea>
 
-            <span class="input-group-btn">
-                <input type="button" class="btn btn-warning btn-sm" id="sendmessage" value="Send">
-
+            <span class="input">
+                <input type="button" class="btn btn-default" id="sendmessage" value="Send">
             </span>
         </div>
     </div>
@@ -33,7 +32,11 @@
 {
     using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logoutForm" }))
     {
-        <a href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
+        <div class="links col-md-6">
+            <div>
+                <a href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
+            </div>
+        </div>
     }
 }
 
@@ -65,11 +68,13 @@
                     position = "right";
                 }
 
-                $('#discussion').append('<div style="width:60%;float:' + position + ';">' +
-                    '<img style="float:'+position+';" src="https://www.phplivesupport.com/pics/icons/avatars/public/avatar_' + (gender == "Male" ? 1 : 2) + '.png" title=' + name + '>'+
-                    '<p style = "text-align:' + position + ';float:'+position+';" class= "message" > ' + htmlEncode(message) + '</p ></div>');
-               
+                $('#discussion').append('<div id="messageDiv" style="width:60%;float:' + position + ';">' +
+                    '<img style="float:' + position + ';" src="https://www.phplivesupport.com/pics/icons/avatars/public/avatar_' + (gender == "Male" ? 1 : 2) + '.png" title=' + name + '>' +
+                    '<div style = "text-align:' + position + ';float:' + position + ';" class= "message" > ' + htmlEncode(message) + '</div >');
                 $("#discussion").append("<div style='clear:both'/>")
+                $('#discussion').append('<div style="float:' + position +';padding: 2px;font-size: 12px;">Added by: ' + name + '</div>');
+                $('#discussion').append('<div style="clear: both"/></div>');
+
                 $(".panel-body").animate({ scrollTop: $('.panel-body').prop("scrollHeight") }, 1000);
             }
             // Get the user name and store it to prepend to messages.
@@ -90,7 +95,7 @@
             });
 
             //if enter then click send message button
-            $('#message').keydown(function (event) {
+            $('#message').keyup(function (event) {
                 if (event.keyCode == 13) {
                     $('#sendmessage').trigger('click');
                 }

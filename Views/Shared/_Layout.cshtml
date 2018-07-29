@@ -9,11 +9,13 @@
 </head>
 <body>
     <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Live Chat Room</p>
-        </footer>
+        <div class="renderBody">
+            <h1>Live Chat Room</h1>
+            @RenderBody()
+            <footer>
+                <p>&copy; @DateTime.Now.Year - Live Chat Room - the best chat in this repository!</p>
+            </footer>
+        </div>       
     </div>
 
     <script src="~/Scripts/jquery-3.0.0.min.js"></script>

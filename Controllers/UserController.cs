@@ -76,14 +76,7 @@ namespace LiveChatRoom.Controllers
         [HttpGet]
         public ActionResult ForgotPassword()
         {
-            if (HttpContext.User.Identity.IsAuthenticated)
-            {
-                return RedirectToAction("Chat", "Home");
-            }
-            else
-            {
-                return View();
-            }
+            return View();
         }
 
         //Verify the reset password link
