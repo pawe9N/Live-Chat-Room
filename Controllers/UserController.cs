@@ -12,11 +12,24 @@ namespace LiveChatRoom.Controllers
 {
     public partial class UserController : Controller
     {
+        //For testing without dataabse
+        private IUserRepository userRepo;
+
+        public UserController(IUserRepository userRepo)
+        {
+            this.userRepo = userRepo;
+        }
+
+        public UserController()
+        {
+            this.userRepo = new EFUserRepository();
+        }
+
         //Registration Action
         [HttpGet]
         public ActionResult Registration()
         {
-            if (HttpContext.User.Identity.IsAuthenticated)
+            if (HttpContext != null && HttpContext.User.Identity.IsAuthenticated == true)
             {
                 return RedirectToAction("Chat", "Home");
             }
@@ -33,21 +46,18 @@ namespace LiveChatRoom.Controllers
             if(id != null)
             {
                 bool Status = false;
-                using (MyDatabaseEntities dc = new MyDatabaseEntities())
-                {
-                    dc.Configuration.ValidateOnSaveEnabled = false;
+                userRepo.ValidateOnSaveEnabledFalse();
 
-                    var v = dc.Users.Where(a => a.ActivationCode == new Guid(id)).FirstOrDefault();
-                    if (v != null)
-                    {
-                        v.IsEmailVerified = true;
-                        dc.SaveChanges();
-                        Status = true;
-                    }
-                    else
-                    {
-                        ViewBag.Message = "Invalid Request";
-                    }
+                var userData = userRepo.Users.Where(a => a.ActivationCode == new Guid(id)).FirstOrDefault();
+                if (userData != null)
+                {
+                    userData.IsEmailVerified = true;
+                    userRepo.SaveChanges();
+                    Status = true;
+                }
+                else
+                {
+                    ViewBag.Message = "Invalid Request";
                 }
                 ViewBag.Status = Status;
                 return View();
@@ -58,11 +68,11 @@ namespace LiveChatRoom.Controllers
             }       
         }
 
-        //Login
+        //To login
         [HttpGet]
         public ActionResult Login()
         {
-            if(HttpContext.User.Identity.IsAuthenticated)
+            if (HttpContext != null && HttpContext.User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("Chat", "Home");
             }
@@ -72,36 +82,31 @@ namespace LiveChatRoom.Controllers
             }
         }
     
-        //Forgot Password
+        //To forgot password page
         [HttpGet]
         public ActionResult ForgotPassword()
         {
             return View();
         }
 
-        //Verify the reset password link
-        //Find account associated with this link
-        //Rediret to reset password page
+        //Find account associated with this reset password code, and then go to reset password page
         [HttpGet]
         public ActionResult ResetPassword(string id)
         {
             if (id != null)
             {
-                using (MyDatabaseEntities dc = new MyDatabaseEntities())
+                var user = userRepo.Users.Where(a => a.ResetPasswordCode == id).FirstOrDefault();
+                if (user != null)
                 {
-                    var user = dc.Users.Where(a => a.ResetPasswordCode == id).FirstOrDefault();
-                    if (user != null)
+                    ResetPasswordModel model = new ResetPasswordModel
                     {
-                        ResetPasswordModel model = new ResetPasswordModel
-                        {
-                            ResetCode = id
-                        };
-                        return View(model);
-                    }
-                    else
-                    {
-                        return HttpNotFound();
-                    }
+                        ResetCode = id
+                    };
+                    return View(model);
+                }
+                else
+                {
+                    return HttpNotFound();
                 }
             }
             else

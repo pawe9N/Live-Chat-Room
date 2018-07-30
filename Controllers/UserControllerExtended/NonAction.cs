@@ -1,32 +1,24 @@
-﻿using LiveChatRoom.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
+﻿using LiveChatRoom.App_Classes;
 using System.Net;
 using System.Net.Mail;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.Security;
-
 
 namespace LiveChatRoom.Controllers
 {
     public partial class UserController : Controller
-    {
-        private string email = ""; //Replace with actual email
-        private string password = "";   //Replace with actual password
-
-        [NonAction]
-        private void SendVerificationLinkEmail(string emailID, string activationCode, string emailFor = "VerifyAccount")
+    {    
+        //Method to sending users verification emails
+        public void SendVerificationLinkEmail(string emailID, string activationCode, string emailFor = "VerifyAccount")
         {
+            SenderEmail senderData = new SenderEmail();
             var verifyUrl = "User/" + emailFor + "/" + activationCode;
             var link = Request.Url.AbsoluteUri.Replace(Request.Url.AbsolutePath, "/" + verifyUrl);
 
-            var fromEmail = new MailAddress(email, "Live Chat Room"); 
+            var fromEmail = new MailAddress(senderData.email, "Live Chat Room"); 
             var toEmail = new MailAddress(emailID);
-            var fromEmailPassword = password; 
+            var fromEmailPassword = senderData.password; 
 
+            //creating messages
             string subject = "", body = "";
             if (emailFor == "VerifyAccount")
             {
@@ -41,7 +33,7 @@ namespace LiveChatRoom.Controllers
                     + "<br/></br><a href=" + link + ">Reset Password link</a>";
             }
 
-
+            //configuring smtp
             var smtp = new SmtpClient
             {
                 Host = "smtp.gmail.com",

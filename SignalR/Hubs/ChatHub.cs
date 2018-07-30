@@ -10,8 +10,10 @@ namespace LiveChatRoom.SignalR.Hubs
 {
     public class ChatHub : Hub
     {
+        //List with active users
         public static Dictionary<string, DateTime> activeUsers = new Dictionary<string, DateTime>();
 
+        //Send message to all users in chat
         public void Send(string name, string message, string gender)
         {
             DateTime date = DateTime.UtcNow;
@@ -26,7 +28,7 @@ namespace LiveChatRoom.SignalR.Hubs
             Clients.All.addNewMessageToPage(name, message, gender);
         }
 
-        //if last message from user was 3 minutes ago then he will be removed from active users
+        //If last message from user was 3 minutes ago then he will be removed from active users
         private void CheckActiveConnections()
         {
             foreach (KeyValuePair<string, DateTime> entry in activeUsers)
@@ -38,7 +40,7 @@ namespace LiveChatRoom.SignalR.Hubs
             }
         }
 
-        //return list of all active users
+        //Return list of all active users
         public List<string> GetAllActiveConnections()
         {
             CheckActiveConnections();

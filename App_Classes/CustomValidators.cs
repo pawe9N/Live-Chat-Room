@@ -9,6 +9,7 @@ namespace LiveChatRoom.App_Classes
 {
     public static class CustomValidators
     {
+        //to check if user is adult
         public class DateOfBirthAdultAttribute : ValidationAttribute
         {
             public static bool IsUserAdult(DateTime? date)
@@ -30,6 +31,7 @@ namespace LiveChatRoom.App_Classes
             }
         }
 
+        //to check if email is exist in database
         public class IsEmailExistAttribute : ValidationAttribute
         {
             private bool IsEmailExist(string emailID)

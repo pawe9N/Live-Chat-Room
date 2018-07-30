@@ -35,19 +35,16 @@ namespace LiveChatRoom.Controllers
                 user.IsEmailVerified = false;
 
                 #region Save to Database
-                using (MyDatabaseEntities dc = new MyDatabaseEntities())
-                {
-                    dc.Users.Add(user);
-                    dc.SaveChanges();
 
-                    //Send Email to User
-                    SendVerificationLinkEmail(user.EmailID, user.ActivationCode.ToString());
-                    Message = "Registration successfully done. Account activation link " +
-                        "has been sent to your email id: " + user.EmailID;
-                    Status = true;
-                }
+                userRepo.Save(user);
+                userRepo.SaveChanges();
+
+                //Send Email to User
+                SendVerificationLinkEmail(user.EmailID, user.ActivationCode.ToString());
+                Message = "Registration successfully done. Account activation link " +
+                    "has been sent to your email id: " + user.EmailID;
+                Status = true;
                 #endregion
-
             }
             else
             {
@@ -67,41 +64,38 @@ namespace LiveChatRoom.Controllers
         {
             string Message = "";
 
-            using (MyDatabaseEntities dc = new MyDatabaseEntities())
+            var userRecord = userRepo.Users.Where(a => a.EmailID == login.EmailId).FirstOrDefault();
+            if (userRecord != null)
             {
-                var v = dc.Users.Where(a => a.EmailID == login.EmailId).FirstOrDefault();
-                if (v != null)
+                if (string.Compare(Crypto.Hash(login.Password), userRecord.Password) == 0)
                 {
-                    if (string.Compare(Crypto.Hash(login.Password), v.Password) == 0)
+                    int timeout = login.RememberMe ? 66600 : 1;
+                    var ticket = new FormsAuthenticationTicket(userRecord.EmailID, login.RememberMe, timeout);
+                    string encrypted = FormsAuthentication.Encrypt(ticket);
+                    var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encrypted)
                     {
-                        int timeout = login.RememberMe ? 525600 : 1; //525600 = 1 min
-                        var ticket = new FormsAuthenticationTicket(v.EmailID, login.RememberMe, timeout);
-                        string encrypted = FormsAuthentication.Encrypt(ticket);
-                        var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encrypted)
-                        {
-                            Expires = DateTime.Now.AddMinutes(timeout),
-                            HttpOnly = true
-                        };
-                        Response.Cookies.Add(cookie);
+                        Expires = DateTime.Now.AddMinutes(timeout),
+                        HttpOnly = true
+                    };
+                    Response.Cookies.Add(cookie);
 
-                        if (Url.IsLocalUrl(ReturnUrl))
-                        {
-                            return Redirect(ReturnUrl);
-                        }
-                        else
-                        {
-                            return RedirectToAction("Chat", "Home");
-                        }
+                    if (Url.IsLocalUrl(ReturnUrl))
+                    {
+                        return Redirect(ReturnUrl);
                     }
                     else
                     {
-                        Message = "Invalid credential provided!";
+                        return RedirectToAction("Chat", "Home");
                     }
                 }
                 else
                 {
                     Message = "Invalid credential provided!";
                 }
+            }
+            else
+            {
+                Message = "Invalid credential provided!";
             }
 
             ViewBag.Message = Message;
@@ -113,66 +107,63 @@ namespace LiveChatRoom.Controllers
         [HttpPost]
         public ActionResult Logout()
         {
-            FormsAuthentication.SignOut();
+            if(HttpContext != null)
+            {
+                FormsAuthentication.SignOut();
+            }
             return RedirectToAction("Login", "User");
         }
 
-        //Verify Email ID
-        //Generate Reset password link
-        //Send Email
+        //After verifying email in database, send email to user with link to reset password page
         [HttpPost]
         public ActionResult ForgotPassword(string EmailID)
         {
             string Message = "";
 
-            using (MyDatabaseEntities dc = new MyDatabaseEntities())
+            var account = userRepo.Users.Where(a => a.EmailID == EmailID).FirstOrDefault();
+            if (account != null)
             {
-                var account = dc.Users.Where(a => a.EmailID == EmailID).FirstOrDefault();
-                if (account != null)
-                {
-                    //Send email for reset password
-                    string resetCode = Guid.NewGuid().ToString();
-                    SendVerificationLinkEmail(account.EmailID, resetCode, "ResetPassword");
-                    account.ResetPasswordCode = resetCode;
+                //Send email for reset password
+                string resetCode = Guid.NewGuid().ToString();
+                SendVerificationLinkEmail(account.EmailID, resetCode, "ResetPassword");
+                account.ResetPasswordCode = resetCode;
 
-                    //to avoid confirm password not match issue,
-                    //confirm password property is on mymodel class
-                    dc.Configuration.ValidateOnSaveEnabled = false;
-                    dc.SaveChanges();
-                    Message = "Reset password link has been sent to your email.";
-                }
-                else
-                {
-                    Message = "Account not found";
-                }
+                //To avoid confirm password not match issue
+                userRepo.ValidateOnSaveEnabledFalse();
+                userRepo.SaveChanges();
+                Message = "Reset password link has been sent to your email.";
             }
+            else
+            {
+                Message = "Account not found";
+            }       
 
             ViewBag.Message = Message;
             return View();
         }
 
+        //After user click in link on email message, he will be directed to reset password page
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ResetPassword(ResetPasswordModel model)
+        [ActionName("ResetPassword")]
+        public ActionResult GetResetPassword(ResetPasswordModel model)
         {
             string Message = "";
             bool Status = false;
             if (ModelState.IsValid)
             {
-                using (MyDatabaseEntities dc = new MyDatabaseEntities())
+                var user = userRepo.Users.Where(a => a.ResetPasswordCode == model.ResetCode).FirstOrDefault();
+                if (user != null)
                 {
-                    var user = dc.Users.Where(a => a.ResetPasswordCode == model.ResetCode).FirstOrDefault();
-                    if (user != null)
-                    {
-                        user.Password = Crypto.Hash(model.NewPassword);
-                        user.ResetPasswordCode = "";
+                    user.Password = Crypto.Hash(model.NewPassword);
+                    user.ResetPasswordCode = "";
 
-                        dc.Configuration.ValidateOnSaveEnabled = false;
-                        dc.SaveChanges();
-                        Message = "New password updated successfully!";
-                        Status = true;
-                    }
-                }
+                    //To avoid confirm password not match issue
+                    userRepo.ValidateOnSaveEnabledFalse();
+                    userRepo.SaveChanges();
+                    Message = "New password updated successfully!";
+                    Status = true;
+                }    
             }
             else
             {

@@ -37,6 +37,7 @@
     </center>
 }
 
+<!-- Script for chatting with active users!-->
 @section scripts {
     <!--Script references. -->
     <!--The jQuery library is required and is referenced by default in _Layout.cshtml. -->
@@ -58,6 +59,7 @@
             // Add the message to the page.
             chat.client.addNewMessageToPage = function (name, message, gender, value) {
 
+                //Check users position in chat
                 if (name != "@Model.UserName") {
                     position = "left";
                 }
@@ -65,6 +67,7 @@
                     position = "right";
                 }
 
+                //Make messages
                 $('#discussion').append('<div id="messageDiv" style="width:60%;float:' + position + ';">' +
                     '<img style="float:' + position + ';" src="https://www.phplivesupport.com/pics/icons/avatars/public/avatar_' + (gender == "Male" ? 1 : 2) + '.png" title=' + name + '>' +
                     '<div style = "float:' + position + ';" class= "message" > ' + htmlEncode(message) + '</div >');
@@ -72,9 +75,10 @@
                 $('#discussion').append('<div style="float:' + position +';margin-right: 10%;font-size: 12px; font-weight: lighter;">' + name + ' - @DateTime.Now.ToString("HH:mm") </div>');
                 $('#discussion').append('<div style="clear: both"/></div>');
 
+                //Make chat panel scroll automaticly
                 $(".panel-body").animate({ scrollTop: $('.panel-body').prop("scrollHeight") }, 1000);
             }
-            // Get the user name and store it to prepend to messages.
+            // Get the user name and gender to store it to prepend to messages.
             $('#displayname').val(name);
             $('#gender').val(gender);
 
@@ -84,7 +88,8 @@
             // Start the connection.
             $.connection.hub.start().done(function () {
                 $('#sendmessage').click(function () {
-                    console.log($('#message').val());
+
+                    //Check if message is not empty
                     if ($('#message').val().replace(/\s/g, "") != "") {
                         // Call the Send method on the hub.
                         chat.server.send(name, $('#message').val(), gender);
@@ -94,7 +99,7 @@
                 });
             });
 
-            //if enter then click send message button
+            //If enter then click send message button
             $('#message').keyup(function (event) {
                 if (event.keyCode == 13) {
                     $('#sendmessage').trigger('click');

@@ -157,6 +157,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Classes\CustomValidators.cs" />
+    <Compile Include="App_Classes\SenderEmail.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\UserControllerExtended\HttpPost.cs" />
     <Compile Include="Controllers\UserControllerExtended\NonAction.cs" />
@@ -166,7 +167,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Extended\User.cs" />
+    <Compile Include="Models\EFUserRepository.cs" />
+    <Compile Include="Models\ExtendedUser\User.cs" />
+    <Compile Include="Models\IUserRepository.cs" />
     <Compile Include="Models\MyModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
