@@ -17,11 +17,27 @@ namespace Tests
     public class HomeControllerTests
     {
         [TestMethod]
-        public void Index_Returns_ActionResult()
+        public void Account_WhenUserAuthorized_ActionResult()
         {
-            HomeController controller = new HomeController();
+            Mock<IUserRepository> mockUser = new Mock<IUserRepository>();
+            mockUser.Setup(m => m.Users).Returns(new User[]
+                {
+                    new User{ UserName="John", Password=Crypto.Hash("123456789"), EmailID="john@wp.pl", DateOfBirth=DateTime.Now.AddYears(-20), Gender="Male", IsEmailVerified=true }
+                }.AsQueryable());
+            HomeController controller = new HomeController(mockUser.Object);
 
-            var actual = controller.Index();
+            var actual = controller.Account("john@wp.pl");
+
+            Assert.IsInstanceOfType(actual, typeof(ActionResult));
+        }
+
+        [TestMethod]
+        public void Account_WhenUserNoAuthorized_ActionResult()
+        {
+            Mock<IUserRepository> mockUser = new Mock<IUserRepository>();
+            HomeController controller = new HomeController(mockUser.Object);
+
+            var actual = controller.Account("");
 
             Assert.IsInstanceOfType(actual, typeof(ActionResult));
         }

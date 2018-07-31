@@ -14,7 +14,7 @@ namespace LiveChatRoom.SignalR.Hubs
         public static Dictionary<string, DateTime> activeUsers = new Dictionary<string, DateTime>();
 
         //Send message to all users in chat
-        public void Send(string name, string message, string gender)
+        public void Send(string name, string message, string avatar)
         {
             DateTime date = DateTime.UtcNow;
             if (!activeUsers.ContainsKey(name))
@@ -25,7 +25,7 @@ namespace LiveChatRoom.SignalR.Hubs
             {
                 activeUsers[name] = date;
             }
-            Clients.All.addNewMessageToPage(name, message, gender);
+            Clients.All.addNewMessageToPage(name, message, avatar);
         }
 
         //If last message from user was 3 minutes ago then he will be removed from active users

@@ -9,7 +9,7 @@
     <div class="panel-body" id="chat">
         <div id="discussion"></div>
         <input type="hidden" id="displayname" />
-        <input type="hidden" id="gender" />
+        <input type="hidden" id="avatar" />
     </div>
     <!-- /.panel-body -->
     <div class="panel-footer">
@@ -28,7 +28,10 @@
     <center style="width:100%;">
         <div class="links col-md-6">
             <div>
-                @Html.ActionLink("Active users", "ActiveUsers", "Home")
+                @Html.ActionLink("Users", "ActiveUsers", "Home")
+            </div>
+            <div>
+                @Html.ActionLink("Account", "Account", "Home")
             </div>
             <div>
                 <a href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
@@ -54,10 +57,10 @@
             // Some variables for differentiate users
             var position = "right";
             var name = "@Model.UserName"
-            var gender = "@Model.Gender"
+            var avatar = "@Model.Avatar"
 
             // Add the message to the page.
-            chat.client.addNewMessageToPage = function (name, message, gender, value) {
+            chat.client.addNewMessageToPage = function (name, message, avatar, value) {
 
                 //Check users position in chat
                 if (name != "@Model.UserName") {
@@ -69,18 +72,16 @@
 
                 //Make messages
                 $('#discussion').append('<div id="messageDiv" style="width:60%;float:' + position + ';">' +
-                    '<img style="float:' + position + ';" src="https://www.phplivesupport.com/pics/icons/avatars/public/avatar_' + (gender == "Male" ? 1 : 2) + '.png" title=' + name + '>' +
-                    '<div style = "float:' + position + ';" class= "message" > ' + htmlEncode(message) + '</div >');
+                    '<img style="float:' + position + ';" src="' + avatar + '" title=' + name + '>' +
+                    '<div style = "float:' + position + ';" class= "message" ><div style="width: 100%;float:' + position +';margin-'+position+': 1%; margin-bottom: 1%;font-size: 12px; font-weight: lighter;"> @DateTime.Now.ToString("HH:mm") </div><div> ' + htmlEncode(message) + '</div></div >');
                 $("#discussion").append("<div style='clear:both'/>")
-                $('#discussion').append('<div style="float:' + position +';margin-right: 10%;font-size: 12px; font-weight: lighter;">' + name + ' - @DateTime.Now.ToString("HH:mm") </div>');
-                $('#discussion').append('<div style="clear: both"/></div>');
 
                 //Make chat panel scroll automaticly
                 $(".panel-body").animate({ scrollTop: $('.panel-body').prop("scrollHeight") }, 1000);
             }
-            // Get the user name and gender to store it to prepend to messages.
+            // Get the user name and avatar to store it to prepend to messages.
             $('#displayname').val(name);
-            $('#gender').val(gender);
+            $('#avatar').val(avatar);
 
             // Set initial focus to message input box.
             $('#message').focus();
@@ -92,7 +93,7 @@
                     //Check if message is not empty
                     if ($('#message').val().replace(/\s/g, "") != "") {
                         // Call the Send method on the hub.
-                        chat.server.send(name, $('#message').val(), gender);
+                        chat.server.send(name, $('#message').val(), avatar);
                     }
                     // Clear text box, scroll down and reset focus for next comment.
                     $('#message').val('').focus();

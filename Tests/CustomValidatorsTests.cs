@@ -26,5 +26,25 @@ namespace Tests
 
             Assert.IsTrue(result);
         }
+
+        [TestMethod]
+        public void IsImageUrl_ValidImageURL_ReturnsTrue()
+        {
+            string url = "https://www.at-languagesolutions.com/en/wp-content/uploads/2016/06/http-1.jpg";
+
+            var result = IsImageUrlAttribute.IsImageUrl(url);
+
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void IsImageUrl_NotValidImageURL_ReturnsTrue()
+        {
+            string url = "google.com";
+
+            var result = IsImageUrlAttribute.IsImageUrl(url);
+
+            Assert.IsFalse(result);
+        }
     }
 }

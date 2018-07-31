@@ -132,6 +132,7 @@
       <DependentUpon>MyDatabase.mdf</DependentUpon>
     </Content>
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\ResetPasswordMessage.html" />
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
     <Content Include="Models\MyModel.Context.tt">
@@ -167,6 +168,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ChangeAvatarModel.cs" />
     <Compile Include="Models\EFUserRepository.cs" />
     <Compile Include="Models\ExtendedUser\User.cs" />
     <Compile Include="Models\IUserRepository.cs" />
@@ -213,7 +215,7 @@
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\User\ForgotPassword.cshtml" />
     <Content Include="Views\User\ResetPassword.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Account.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,0 +1,71 @@
+﻿@model LiveChatRoom.Models.User
+
+<br />
+
+<h2>Change Your Avatar</h2>
+@using (Html.BeginForm("Account", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+<div class="form-horizontal">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        <img src="@Model.Avatar" />
+        <label class="control-label col-md-10">Avatar url:</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Avatar, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Avatar url:" } })
+            @Html.ValidationMessageFor(model => model.Avatar, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" value="Change Avatar" class="btn btn-success" id="submit" />
+    </div>
+</div>
+}
+
+<div>@ViewBag.Message</div>
+
+<br />
+<h2>Change Your Password</h2>
+@using (Html.BeginForm("ResetPassword", "User", FormMethod.Get))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+            <input type="hidden" value=@Model.ResetPasswordCode name="id" />
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Reset Password" class="btn btn-success" id="submit" />
+        </div>
+    </div>
+}
+<br />
+
+
+@using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logoutForm" }))
+{
+    <center style="width:100%;">
+        <div class="links col-md-6">
+            <div>
+                @Html.ActionLink("Users", "ActiveUsers", "Home")
+            </div>
+            <div>
+                @Html.ActionLink("Chat", "Chat", "Home")
+            </div>
+            <div>
+                <a href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
+            </div>
+        </div>
+    </center>
+}
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $(".form-control").val("");
+        });
+
+        $('.form-control').keydown(function (event) {
+            if (event.keyCode == 13) {
+                $('#submit').trigger('click');
+            }
+        });
+    </script>
+}

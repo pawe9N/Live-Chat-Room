@@ -23,5 +23,6 @@ namespace LiveChatRoom.Models
         public bool IsEmailVerified { get; set; }
         public System.Guid ActivationCode { get; set; }
         public string ResetPasswordCode { get; set; }
+        public string Avatar { get; set; }
     }
 }

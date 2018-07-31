@@ -16,8 +16,9 @@
           <Property Name="DateOfBirth" Type="datetime" Nullable="false" />
           <Property Name="Gender" Type="varchar" MaxLength="6" Nullable="false" />
           <Property Name="IsEmailVerified" Type="bit" Nullable="false" />
-          <Property Name="ActivationCode" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ActivationCode" Type="uniqueidentifier" />
           <Property Name="ResetPasswordCode" Type="nvarchar" MaxLength="100" />
+          <Property Name="Avatar" Type="varchar(max)" />
         </EntityType>
         <EntityContainer Name="MyDatabaseModelStoreContainer">
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
@@ -36,9 +37,10 @@
           <Property Name="EmailID" Type="String" MaxLength="254" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="DateOfBirth" Type="DateTime" Precision="3" Nullable="false" />
           <Property Name="IsEmailVerified" Type="Boolean" Nullable="false" />
-          <Property Name="ActivationCode" Type="Guid" Nullable="false" />
+          <Property Name="ActivationCode" Type="Guid" />
           <Property Name="ResetPasswordCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Gender" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="Avatar" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityContainer Name="MyDatabaseEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Users" EntityType="Self.User" />
@@ -52,6 +54,7 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="MyDatabaseModel.User">
               <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Avatar" ColumnName="Avatar" />
                 <ScalarProperty Name="Gender" ColumnName="Gender" />
                 <ScalarProperty Name="ResetPasswordCode" ColumnName="ResetPasswordCode" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />

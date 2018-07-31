@@ -15,7 +15,7 @@ namespace LiveChatRoom.Controllers
         //Registration POST action
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Registration([Bind(Exclude = "IsEmailVerified, ActivationCode")] User user)
+        public ActionResult Registration([Bind(Exclude = "IsEmailVerified, ActivationCode, Avatar")] User user)
         {
             bool Status = false;
             string Message = "";
@@ -33,6 +33,7 @@ namespace LiveChatRoom.Controllers
                 #endregion
 
                 user.IsEmailVerified = false;
+                user.Avatar = "https://i.cdn-sc.com/users/default-avatar.jpg";
 
                 #region Save to Database
 
@@ -42,13 +43,9 @@ namespace LiveChatRoom.Controllers
                 //Send Email to User
                 SendVerificationLinkEmail(user.EmailID, user.ActivationCode.ToString());
                 Message = "Registration successfully done. Account activation link " +
-                    "has been sent to your email id: " + user.EmailID;
+                    "has been sent to your email!";
                 Status = true;
                 #endregion
-            }
-            else
-            {
-                Message = "Invalid Request";
             }
 
             ViewBag.Message = Message;
@@ -90,12 +87,12 @@ namespace LiveChatRoom.Controllers
                 }
                 else
                 {
-                    Message = "Invalid credential provided!";
+                    Message = "Invalid credentials provided!";
                 }
             }
             else
             {
-                Message = "Invalid credential provided!";
+                Message = "Invalid credentials provided!";
             }
 
             ViewBag.Message = Message;
