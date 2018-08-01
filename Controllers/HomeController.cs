@@ -56,6 +56,7 @@ namespace LiveChatRoom.Controllers
                 return HttpNotFound();
         }
   
+        //To change Avatar url
         [Authorize]
         [HttpPost]
         public ActionResult Account(ChangeAvatarModel avatarModel)
