@@ -72,7 +72,7 @@
 
                 //Make messages
                 $('#discussion').append('<div id="messageDiv" style="width:60%;float:' + position + ';">' +
-                    '<figure style="float:' + position + ';width: 11%; min-width: 60px;"><img src="' + avatar + '" title=' + name + '/><figcaption style="text-align: center; margin-top: -5%; font-size: 90%;">'+name+'</figcaption></figure>' +
+                    '<figure style="float:' + position + ';width: 11%; min-width: 60px;"><img src="' + avatar + '" title=' + name + '><figcaption style="text-align: center; margin-top: -5%; font-size: 90%;">'+name+'</figcaption></figure>' +
                     '<div style = "float:' + position + '; margin-'+position+': 2%;" class= "message" ><div style="width: 100%;float:' + position +';margin-'+position+': 1%; margin-bottom: 1%;font-size: 12px; font-weight: lighter;"> @DateTime.Now.ToString("HH:mm") </div><div> ' + htmlEncode(message) + '</div></div >');
                 $("#discussion").append("<div style='clear:both'/>")
 
