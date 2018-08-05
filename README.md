@@ -21,7 +21,10 @@ After that you will can open this application!
 
 ## Little demo with Gifs
 
-- How "Live Chat Room" works? (on Chrome, Firefox and Edge)
+- How to send messages?
+<img src="https://i.imgur.com/fPR28J2.gif">
+
+- How "Live Chat Room" works on several browsers? (on Chrome, Firefox and Edge)
 <img src="https://i.imgur.com/PWjJs1K.gif">
 
 - Simple registration
