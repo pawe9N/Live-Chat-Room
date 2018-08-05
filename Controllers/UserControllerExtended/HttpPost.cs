@@ -82,7 +82,7 @@ namespace LiveChatRoom.Controllers
                     }
                     else
                     {
-                        return RedirectToAction("Chat", "Home");
+                        return RedirectToAction("Account", "Home");
                     }
                 }
                 else

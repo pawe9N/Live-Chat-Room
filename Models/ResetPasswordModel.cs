@@ -8,10 +8,12 @@ namespace LiveChatRoom.Models
 {
     public class ResetPasswordModel
     {
+        [Display(Name = "New Password")]
         [Required(ErrorMessage = "New password required", AllowEmptyStrings = false)]
         [DataType(DataType.Password)]
         public string NewPassword { get; set; }
 
+        [Display(Name = "Confirm Password")]
         [DataType(DataType.Password)]
         [Compare("NewPassword", ErrorMessage = "New password and confirm password does not match")]
         public string ConfirmPassword { get; set; }

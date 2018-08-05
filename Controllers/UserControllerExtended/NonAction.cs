@@ -36,14 +36,14 @@ namespace LiveChatRoom.Controllers
                 subject = "Your account is successfully created";        
                 body = body.Replace("#link", "<a href='" + link + "'>Verify Account</a>");
                 body = body.Replace("#message", "Welcome #user, <br/><br/>We are excited to tell you that your account is successfully created!" +
-                        "<br/><br/>Click on the below link to verify your account!");
+                        "<br/><br/>Click on the link below to verify your account!");
                 body = body.Replace("#user", userRecord.UserName);
             }
             else if (emailFor == "ResetPassword")
             {
                 subject = "Reset Password";
                 body = body.Replace("#link", "<a href=" + link + ">Reset Password link</a>");
-                body = body.Replace("#message", "Welcome #user, <br /><br />We got request for reset your account password. Please click on the below link to reset your password:");
+                body = body.Replace("#message", "Welcome #user, <br /><br />We got request for reset your account password. Please click on the link below to reset your password!");
                 body = body.Replace("#user", userRecord.UserName);
             }
 

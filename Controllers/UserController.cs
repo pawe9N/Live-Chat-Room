@@ -31,7 +31,7 @@ namespace LiveChatRoom.Controllers
         {
             if (HttpContext != null && HttpContext.User.Identity.IsAuthenticated == true)
             {
-                return RedirectToAction("Chat", "Home");
+                return RedirectToAction("Account", "Home");
             }
             else
             {
@@ -74,7 +74,7 @@ namespace LiveChatRoom.Controllers
         {
             if (HttpContext != null && HttpContext.User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("Chat", "Home");
+                return RedirectToAction("Account", "Home");
             }
             else
             {
@@ -102,6 +102,7 @@ namespace LiveChatRoom.Controllers
                     {
                         ResetCode = id
                     };
+
                     return View(model);
                 }
                 else

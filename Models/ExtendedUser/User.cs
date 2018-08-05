@@ -14,6 +14,8 @@ namespace LiveChatRoom.Models
     {
         [Display(Name = "User Name")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "User name is required")]
+        [MaxLength(24, ErrorMessage = "Maximum 24 characters required")]
+        [MinLength(3, ErrorMessage = "Minimum 3 characters required")]
         public string UserName { get; set; }
 
         [Display(Name = "Email ID")]

@@ -9,7 +9,7 @@
 <div class="form-horizontal">
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="form-group">
-        <img src="@Model.Avatar" />
+        <img src="@Model.Avatar" style="min-width:90px; width:90px; min-height:90px; height: 90px;"/>
         <label class="control-label col-md-10">Avatar url:</label>
         <div class="col-md-10">
             @Html.EditorFor(model => model.Avatar, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Avatar url:" } })
