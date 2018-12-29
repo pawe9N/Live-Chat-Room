@@ -2,13 +2,12 @@
 This app was created for purpose of learning ASP.NET MVC, MSTest, Moq, SignalR library, C# and JQuery.
 
 ## Description of application
-This application is a simple chat app, where random people can speak with each other. Each of users has his own avatar and username, which will be displayed next to his messages in chat subpage. Users can change their avatars and passwords in Account subpage. They can also see which of users was active for 3 minutes before in chat through  ActiveUsers subpage. To sign up to this app, user has to be an adult, he must input 3-24 characters in username, at least 6 characters in password and his email can not be in database. After sign up, veryfication email with link will be sent to click it. When user forgets his password, he can recall it with help ForgotPassword page. Chat, Account and ActiveUsers subpages can be displayed only for authorized users, who have gone through Login subpage.
+This application is a simple chat app, where random people can speak with each other. Each of users has its own avatar and username, which will be displayed next to its messages in chat subpage. Users can change their avatars and passwords in Account subpage. They can also see which of users was active for 3 minutes before in chat through ActiveUsers subpage. To sign up to this app, user has to be an adult, he must input 3-24 characters in username, at least 6 characters in password and his email can not be in database. After sign up, verification email with link will be sent. When user forgets his password, he can recall it with help ForgotPassword page. Chat, Account and ActiveUsers subpages can be displayed only for authorized users, who have gone through Login subpage.
 
 ## Getting Started
 
 If you want to use this program, you have to download all files of this repository.
-After that you have to create senderEmailData.json file in Content directory for sending your email data to smtp function, 
-which is needed to send email messages to users:
+After that you have to change senderEmailData.json file in Content directory with your email data which are needed to send email messages to users:
 
 ```
 {
